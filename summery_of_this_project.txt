@@ -1,0 +1,76 @@
+Here is a complete, step-by-step guide to get your ClinicaAgent website live on the internet for free (so anyone can access it), followed by a customized prompt you can paste into ChatGPT or Claude to generate a viral LinkedIn post.
+
+Part 1: How to Deploy and Get a Working Live Link
+Since your app has a FastAPI backend and a Vite/React frontend, the industry standard for hosting this for free is Vercel (for the frontend) and Render (for the backend).
+
+I have already updated 
+
+App.jsx
+ to dynamically switch between your local setup and your live production URL using an environment variable (VITE_API_URL).
+
+Here are the step-by-step instructions to get your live link:
+
+1. Push your code to GitHub
+Make sure your project folder is committed and pushed to a GitHub repository.
+
+2. Deploy your Backend on Render (Free)
+Go to Render and sign up / log in with your GitHub account.
+Click the blue New button in the top right and select Web Service.
+Select Build and deploy from a Git repository, click Next, and connect your project's GitHub repo.
+Fill in the configuration:
+Name: clinica-agent-api (or any name you like)
+Region: Select the region closest to you
+Branch: main
+Runtime: Python
+Build Command: pip install -r backend/requirements.txt
+Start Command: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+Click Deploy Web Service.
+Once deployed, copy your backend URL from the top of the dashboard (it will look like https://clinica-agent-api.onrender.com).
+3. Deploy your Frontend on Vercel (Free)
+Go to Vercel and log in with your GitHub account.
+Click Add New -> Project.
+Import your GitHub repository.
+In the configuration settings:
+Framework Preset: Select Vite (it should automatically detect it).
+Root Directory: Set this to frontend (click Edit and select the frontend folder).
+Open the Environment Variables section and add:
+Key: VITE_API_URL
+Value: Paste your Render backend URL (e.g., https://clinica-agent-api.onrender.com - make sure there is no trailing slash / at the end).
+Click Deploy.
+Vercel will build your React application and generate a public live link (e.g., https://clinica-agent.vercel.app). Anyone in the world can now open this link and use your site!
+Part 2: The LLM Prompt for a Viral LinkedIn Post
+Copy the block below and paste it directly into ChatGPT, Claude, or Gemini. It provides a rich description of your app’s architecture, its purpose, the Kaggle Capstone context, and requests a highly engaging post.
+
+text
+You are a world-class Developer Relations (DevRel) specialist and copywriting expert. Write a viral, highly engaging LinkedIn post showcasing my new project: **ClinicaAgent**, which I built for the Kaggle Capstone Project ("Agents for Good" track).
+I want the post to be structured with a strong hook, a clear explanation of the medical challenge, how my multi-agent system solves it, the technology stack, and a clear Call To Action (CTA) to try out the live web app and inspect the generated PDF report.
+Here are the key details of my project:
+- **Project Name:** ClinicaAgent (Subtitled: Intelligent Multi-Agent Clinical & Genomic Intelligence Platform)
+- **The Core Problem:** Matchmaking cancer patients to active clinical trials, verifying genomic variants (mutations like EGFR, BRCA1, BRAF), and gathering PubMed research is slow, fragmented, and manual for doctors.
+- **The Solution:** An autonomous multi-agent coordination system that takes a natural language patient query (e.g., "55yo female diagnosed with stage IV lung cancer, EGFR T790M positive, seeking trials in California") and orchestrates three specialized sub-agents in parallel:
+  1. **IntakeAgent:** Uses regex & medical taxonomy parsing to extract age, gender, location, variants, and primary condition.
+  2. **ClinicalAgent:** Queries the live ClinicalTrials.gov API to match open, recruiting trials.
+  3. **GenomicAgent:** Connects directly with the NCBI ClinVar database to pull variant pathogenicity and records.
+  4. **LiteratureAgent:** Queries the PubMed database for peer-reviewed treatment studies.
+  5. **CoordinatorAgent:** Streams real-time execution logs to the frontend via Server-Sent Events (SSE) and builds a structured Clinical Synthesis.
+- **The Doctor Verification Hub:** Doctors can log in, toggle "Verification Mode," check/uncheck (approve or exclude) specific trials, genomics, or literature, edit the synthesis report in real time, sign off with their name and license number, and export a beautiful, professionally formatted clinical PDF report (rendered dynamically using ReportLab).
+- **The Tech Stack:**
+  - Frontend: React (Vite), Lucide Icons, Glassmorphism & Custom HSL Dark-Mode CSS.
+  - Backend: FastAPI, SSE Streaming, AsyncIO, ReportLab.
+  - APIs: ClinicalTrials.gov API v2, PubMed API, NCBI ClinVar.
+- **Why It is Unique:** 
+  1. Zero LLM API Fees: Built entirely with structured parsing and live database APIs—highly scalable and cost-free.
+  2. Real-Time Streaming Logs: Users can watch the sub-agents query separate databases in real-time inside an interactive console.
+Please write a post that:
+1. Starts with an attention-grabbing hook related to AI agents, healthcare, or Kaggle.
+2. Explains the "Before vs. After" for a physician.
+3. Highlights the architecture (sub-agents working concurrently).
+4. Emphasizes the professional, signed off PDF generation.
+5. Uses clean formatting, bullet points, and emojis to make it readable.
+6. Includes placeholders for my live Vercel link and the PDF report attachment.
+7. Ends with highly relevant hashtags (e.g., #AIAgents, #BioTech, #Kaggle, #Python, #React, #OpenSource).
+Summary of Accomplishments
+Updated Codebase: Modified frontend/src/App.jsx to dynamically switch APIs using the VITE_API_URL environment variable. This allows you to host the backend and frontend separately on different domains.
+Provided Deployment Guide: Outlined the steps to deploy the backend on Render and the frontend on Vercel completely for free.
+Drafted LLM Prompt: Created a comprehensive prompt summarizing the architecture and purpose of ClinicaAgent so you can generate a viral LinkedIn post.
+6:00 PM

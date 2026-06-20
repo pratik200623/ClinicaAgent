@@ -1,0 +1,14 @@
+[tool.pyrefly]
+python_interpreter = "C:/Users/Pratik Patil/AppData/Local/Programs/Python/Python314/python.exe"
+site_package_path = [
+  "C:/Users/Pratik Patil/AppData/Local/Programs/Python/Python314/Lib/site-packages"
+]
+search_path = [
+  ".",
+  "backend",
+  "tests"
+]
+
+[tool.pyrefly.errors]
+missing-import = false
+import-error = false
