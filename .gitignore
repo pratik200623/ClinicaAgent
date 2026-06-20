@@ -16,3 +16,9 @@ dist/
 # OS
 .DS_Store
 Thumbs.db
+
+# IDE/Local Temp Files
+.gemini/
+ClinicaAgent/
+scratch/
+
