@@ -7,6 +7,7 @@ from typing import List, Optional
 from pydantic import BaseModel
 from .agents.coordinator import run_orchestration_stream
 from .utils.pdf_generator import generate_clinical_pdf
+from .utils.translator import translate_text, SUPPORTED_LANGUAGES
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -39,9 +40,27 @@ class ExportPDFRequest(BaseModel):
     approved_genomics: List[dict]
     approved_literature: List[dict]
 
+
+class TranslateRequest(BaseModel):
+    text: str
+    target_lang: str
+
 @app.get("/api/health")
 def health_check():
     return {"status": "healthy", "service": "ClinicaAgent API"}
+
+@app.post("/api/translate")
+async def handle_translate(request: TranslateRequest):
+    """
+    Translates provided text (e.g. dynamic clinical synthesis) into a target language.
+    """
+    logger.info(f"Received translation request to: {request.target_lang}")
+    try:
+        translated = translate_text(request.text, request.target_lang)
+        return {"translated_text": translated}
+    except Exception as e:
+        logger.error(f"Failed to translate: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/api/intake")
 async def handle_intake(request: QueryRequest):

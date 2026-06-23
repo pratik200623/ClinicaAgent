@@ -21,4 +21,5 @@ Thumbs.db
 .gemini/
 ClinicaAgent/
 scratch/
-
+scratch_*.py
+summery_of_this_project.txt

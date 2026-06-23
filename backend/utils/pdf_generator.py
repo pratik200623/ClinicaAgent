@@ -190,6 +190,8 @@ def generate_clinical_pdf(
         for t in approved_trials:
             locations = ", ".join(t.get("locations", [])) or "N/A"
             criteria = f"Age: {t.get('age_range', 'N/A')} | Sex: {t.get('gender_requirement', 'N/A')}"
+            if t.get("eligibility_score"):
+                criteria += f"<br/><b>Verification Score:</b> {t.get('eligibility_score')}"
             trials_table_data.append([
                 Paragraph(f"<b>{t.get('nct_id', 'N/A')}</b><br/>{t.get('phase', 'N/A')}", table_body_style),
                 Paragraph(f"<b>{t.get('title', 'N/A')}</b><br/>Sponsor: {t.get('sponsor', 'N/A')}", table_body_style),

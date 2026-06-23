@@ -45,8 +45,240 @@ export default function App() {
   const [physicianName, setPhysicianName] = useState('')
   const [licenseNumber, setLicenseNumber] = useState('')
   const [exportingPdf, setExportingPdf] = useState(false)
+  
+  // Enhancement States
+  const [selectedLanguage, setSelectedLanguage] = useState('en')
+  const [translating, setTranslating] = useState(false)
+  const [checklistStates, setChecklistStates] = useState({})
 
   const API_BASE = import.meta.env.VITE_API_URL || '';
+
+  // Eligibility Check Helpers
+  const checkAgeEligibility = (patientAge, ageRangeStr) => {
+    if (!patientAge) return true;
+    if (!ageRangeStr) return true;
+    const range = ageRangeStr.toLowerCase();
+    if (range.includes("any") || range.includes("see") || range.includes("not specified")) return true;
+    
+    const numbers = range.match(/\d+/g);
+    if (!numbers) return true;
+    
+    if (numbers.length === 1) {
+      const limit = parseInt(numbers[0], 10);
+      if (range.includes("minimum") || range.includes("min") || range.includes("over") || range.includes("older") || range.includes(">= ")) {
+        return patientAge >= limit;
+      }
+      if (range.includes("maximum") || range.includes("max") || range.includes("under") || range.includes("younger") || range.includes("<= ")) {
+        return patientAge <= limit;
+      }
+      return true;
+    }
+    
+    if (numbers.length >= 2) {
+      const min = parseInt(numbers[0], 10);
+      const max = parseInt(numbers[1], 10);
+      return patientAge >= min && patientAge <= max;
+    }
+    
+    return true;
+  }
+
+  const checkSexEligibility = (patientGender, genderReq) => {
+    if (!patientGender || !genderReq) return true;
+    const pGender = patientGender.toLowerCase().trim();
+    const req = genderReq.toLowerCase().trim();
+    
+    if (req === 'all' || req === 'both' || req === '' || req.includes('any')) return true;
+    if (pGender === 'female' && (req.includes('female') || req === 'f')) return true;
+    if (pGender === 'male' && (req.includes('male') || req === 'm')) return true;
+    
+    return false;
+  }
+
+  const calculateTrialScore = (nctId) => {
+    const state = checklistStates[nctId];
+    if (!state) return 0;
+    const total = 4;
+    const count = (state.age ? 1 : 0) + (state.sex ? 1 : 0) + (state.malignancy ? 1 : 0) + (state.organ ? 1 : 0);
+    return Math.round((count / total) * 100);
+  }
+
+  const toggleChecklistCriteria = (nctId, field) => {
+    setChecklistStates(prev => {
+      const current = prev[nctId] || { age: false, sex: false, malignancy: false, organ: false };
+      const updated = {
+        ...prev,
+        [nctId]: {
+          ...current,
+          [field]: !current[field]
+        }
+      };
+      
+      // Update approved_trials with the updated score
+      const criteria = updated[nctId];
+      const count = (criteria.age ? 1 : 0) + (criteria.sex ? 1 : 0) + (criteria.malignancy ? 1 : 0) + (criteria.organ ? 1 : 0);
+      const scorePct = Math.round((count / 4) * 100);
+      
+      setApprovedTrials(trials => trials.map(t => {
+        if (t.nct_id === nctId) {
+          return {
+            ...t,
+            eligibility_score: `${scorePct}% Match (${count}/4)`,
+            checklist: criteria
+          };
+        }
+        return t;
+      }));
+      
+      return updated;
+    });
+  }
+
+  // Translation Handler
+  const handleTranslateReport = async (langCode) => {
+    setSelectedLanguage(langCode);
+    if (langCode === 'en') {
+      setEditedSynthesis(results?.synthesis || '');
+      return;
+    }
+    
+    setTranslating(true);
+    try {
+      const response = await fetch(`${API_BASE}/api/translate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text: results?.synthesis || '',
+          target_lang: langCode
+        })
+      });
+      
+      if (!response.ok) {
+        throw new Error("Translation failed");
+      }
+      
+      const data = await response.json();
+      setEditedSynthesis(data.translated_text);
+    } catch (err) {
+      alert(`Translation Error: ${err.message}`);
+      setSelectedLanguage('en');
+    } finally {
+      setTranslating(false);
+    }
+  }
+
+  // FHIR JSON Interoperability Export
+  const handleExportFHIR = () => {
+    if (!results) return;
+    
+    const patientResource = {
+      resourceType: "Patient",
+      id: "patient-1",
+      gender: results.profile.gender || "unknown",
+      birthDate: results.profile.age ? new Date(new Date().getFullYear() - results.profile.age, 0, 1).toISOString().split('T')[0] : undefined,
+      extension: [
+        {
+          url: "http://hl7.org/fhir/StructureDefinition/patient-location",
+          valueString: results.profile.location || "unknown"
+        }
+      ]
+    };
+    
+    const observationResource = approvedGenomics.map((g, idx) => ({
+      resourceType: "Observation",
+      id: `genomic-obs-${idx}`,
+      status: "final",
+      category: [{
+        coding: [{
+          system: "http://terminology.hl7.org/CodeSystem/observation-category",
+          code: "laboratory",
+          display: "Laboratory"
+        }]
+      }],
+      code: {
+        coding: [{
+          system: "http://loinc.org",
+          code: "81302-2",
+          display: "Genetic variant assessment"
+        }],
+        text: `Genomic Variant Detection: ${g.variant}`
+      },
+      subject: { reference: "Patient/patient-1" },
+      valueCodeableConcept: {
+        text: g.clinical_significance || "Significance Unknown"
+      },
+      component: [
+        {
+          code: { text: "Gene Symbol" },
+          valueString: g.gene || "Unknown"
+        },
+        {
+          code: { text: "ClinVar ID" },
+          valueString: g.clinvar_id || "N/A"
+        }
+      ]
+    }));
+
+    const studyResources = approvedTrials.map((t, idx) => ({
+      resourceType: "ResearchStudy",
+      id: `clinical-trial-${idx}`,
+      status: "active",
+      title: t.title,
+      identifier: [{
+        system: "http://clinicaltrials.gov",
+        value: t.nct_id
+      }],
+      sponsor: {
+        display: t.sponsor
+      },
+      description: t.summary,
+      phase: {
+        text: t.phase
+      },
+      location: (t.locations || []).map(loc => ({ text: loc })),
+      extension: [
+        {
+          url: "http://hl7.org/fhir/StructureDefinition/eligibility-score",
+          valueString: t.eligibility_score || "N/A"
+        }
+      ]
+    }));
+
+    const practitionerResource = {
+      resourceType: "Practitioner",
+      id: "practitioner-1",
+      name: [{ text: physicianName || "Unknown Physician" }],
+      identifier: [{
+        system: "http://hl7.org/fhir/sid/us-npi",
+        value: licenseNumber || "N/A"
+      }]
+    };
+
+    const fhirBundle = {
+      resourceType: "Bundle",
+      id: `clinica-report-bundle-${Date.now()}`,
+      type: "document",
+      timestamp: new Date().toISOString(),
+      entry: [
+        { resource: patientResource },
+        { resource: practitionerResource },
+        ...observationResource.map(r => ({ resource: r })),
+        ...studyResources.map(r => ({ resource: r }))
+      ]
+    };
+
+    const blob = new Blob([JSON.stringify(fhirBundle, null, 2)], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ClinicaAgent_FHIR_Bundle_${physicianName.replace(/\s+/g, '_') || 'Report'}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  }
 
   const toggleTrialApproval = (trial) => {
     setApprovedTrials(prev => {
@@ -80,6 +312,7 @@ export default function App() {
       }
     });
   }
+
 
   const handleExportPDF = async () => {
     if (!physicianName.trim() || !licenseNumber.trim()) {
@@ -182,11 +415,36 @@ export default function App() {
                 status: event.status
               }])
             } else if (event.status === 'result') {
-              setResults(event.data)
+              const initialChecklists = {};
+              const updatedTrials = (event.data.clinical_trials || []).map(trial => {
+                const ageMatch = checkAgeEligibility(event.data.profile.age, trial.age_range);
+                const sexMatch = checkSexEligibility(event.data.profile.gender, trial.gender_requirement);
+                initialChecklists[trial.nct_id] = {
+                  age: ageMatch,
+                  sex: sexMatch,
+                  malignancy: false,
+                  organ: false
+                };
+                const scoreCount = (ageMatch ? 1 : 0) + (sexMatch ? 1 : 0);
+                const scorePct = Math.round((scoreCount / 4) * 100);
+                return {
+                  ...trial,
+                  eligibility_score: `${scorePct}% Match (${scoreCount}/4)`,
+                  checklist: initialChecklists[trial.nct_id]
+                };
+              });
+
+              setResults({
+                ...event.data,
+                clinical_trials: updatedTrials
+              });
               setEditedSynthesis(event.data.synthesis || '')
-              setApprovedTrials(event.data.clinical_trials || [])
+              setApprovedTrials(updatedTrials)
               setApprovedGenomics(event.data.genomics || [])
               setApprovedLiterature(event.data.literature || [])
+              setChecklistStates(initialChecklists)
+              setSelectedLanguage('en')
+
             } else if (event.status === 'error') {
               setLogs(prev => [...prev, {
                 agent: 'CoordinatorAgent',
@@ -381,14 +639,14 @@ export default function App() {
                 </div>
                 
                 {isVerificationMode && (
-                  <div className="physician-inputs" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                  <div className="physician-inputs" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
                     <input
                       type="text"
                       placeholder="Dr. Name"
                       value={physicianName}
                       onChange={(e) => setPhysicianName(e.target.value)}
                       className="text-input-custom"
-                      style={{ maxWidth: '140px', padding: '0.4rem 0.6rem', fontSize: '0.8rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', borderRadius: '4px' }}
+                      style={{ maxWidth: '120px', padding: '0.4rem 0.6rem', fontSize: '0.8rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', borderRadius: '4px' }}
                     />
                     <input
                       type="text"
@@ -396,15 +654,37 @@ export default function App() {
                       value={licenseNumber}
                       onChange={(e) => setLicenseNumber(e.target.value)}
                       className="text-input-custom"
-                      style={{ maxWidth: '110px', padding: '0.4rem 0.6rem', fontSize: '0.8rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', borderRadius: '4px' }}
+                      style={{ maxWidth: '100px', padding: '0.4rem 0.6rem', fontSize: '0.8rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', borderRadius: '4px' }}
                     />
+                    <select
+                      value={selectedLanguage}
+                      onChange={(e) => handleTranslateReport(e.target.value)}
+                      disabled={translating}
+                      className="language-select"
+                    >
+                      <option value="en">🇺🇸 English</option>
+                      <option value="es">🇪🇸 Spanish</option>
+                      <option value="fr">🇫🇷 French</option>
+                      <option value="de">🇩🇪 German</option>
+                      <option value="it">🇮🇹 Italian</option>
+                      <option value="pt">🇵🇹 Portuguese</option>
+                    </select>
+                    {translating && <span style={{ fontSize: '0.75rem', color: 'var(--color-primary)' }}>Translating...</span>}
                     <button
                       onClick={handleExportPDF}
-                      disabled={exportingPdf}
+                      disabled={exportingPdf || translating}
                       className="btn-primary"
                       style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem', whiteSpace: 'nowrap', minHeight: 'auto', margin: 0 }}
                     >
                       {exportingPdf ? 'Exporting...' : 'Export Verified PDF'}
+                    </button>
+                    <button
+                      onClick={handleExportFHIR}
+                      disabled={translating}
+                      className="btn-primary"
+                      style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem', whiteSpace: 'nowrap', minHeight: 'auto', margin: 0, background: 'linear-gradient(135deg, var(--color-genomic) 0%, #8b5cf6 100%)', color: '#fff' }}
+                    >
+                      Export FHIR JSON
                     </button>
                   </div>
                 )}
@@ -492,7 +772,14 @@ export default function App() {
                                 )}
                                 <h4 className="card-title">{trial.title}</h4>
                               </div>
-                              <span className="card-badge">{trial.phase}</span>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <span className="card-badge">{trial.phase}</span>
+                                {isVerificationMode && (
+                                  <span className={`score-badge ${calculateTrialScore(trial.nct_id) >= 75 ? 'high' : calculateTrialScore(trial.nct_id) >= 50 ? 'medium' : 'low'}`}>
+                                    {calculateTrialScore(trial.nct_id)}% Match
+                                  </span>
+                                )}
+                              </div>
                             </div>
                             <div className="card-subtitle">{trial.nct_id} | Sponsor: {trial.sponsor}</div>
                             <p className="card-desc">{trial.summary}</p>
@@ -510,6 +797,51 @@ export default function App() {
                                 View Trial <ExternalLink size={12} />
                               </a>
                             </div>
+
+                            {isVerificationMode && (
+                              <div className="checklist-container">
+                                <div className="checklist-header">
+                                  <span>Eligibility Pre-screening</span>
+                                  <span style={{ fontSize: '0.75rem', color: 'var(--color-primary)' }}>
+                                    {Object.values(checklistStates[trial.nct_id] || {}).filter(Boolean).length}/4 Criteria Verified
+                                  </span>
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+                                  <label className={`checklist-item ${(checklistStates[trial.nct_id]?.age) ? 'verified' : ''}`}>
+                                    <input 
+                                      type="checkbox" 
+                                      checked={!!checklistStates[trial.nct_id]?.age} 
+                                      onChange={() => toggleChecklistCriteria(trial.nct_id, 'age')}
+                                    />
+                                    <span>Patient age matches trial range ({trial.age_range})</span>
+                                  </label>
+                                  <label className={`checklist-item ${(checklistStates[trial.nct_id]?.sex) ? 'verified' : ''}`}>
+                                    <input 
+                                      type="checkbox" 
+                                      checked={!!checklistStates[trial.nct_id]?.sex} 
+                                      onChange={() => toggleChecklistCriteria(trial.nct_id, 'sex')}
+                                    />
+                                    <span>Patient sex matches trial requirement ({trial.gender_requirement})</span>
+                                  </label>
+                                  <label className={`checklist-item ${(checklistStates[trial.nct_id]?.malignancy) ? 'verified' : ''}`}>
+                                    <input 
+                                      type="checkbox" 
+                                      checked={!!checklistStates[trial.nct_id]?.malignancy} 
+                                      onChange={() => toggleChecklistCriteria(trial.nct_id, 'malignancy')}
+                                    />
+                                    <span>No active secondary malignancies</span>
+                                  </label>
+                                  <label className={`checklist-item ${(checklistStates[trial.nct_id]?.organ) ? 'verified' : ''}`}>
+                                    <input 
+                                      type="checkbox" 
+                                      checked={!!checklistStates[trial.nct_id]?.organ} 
+                                      onChange={() => toggleChecklistCriteria(trial.nct_id, 'organ')}
+                                    />
+                                    <span>Adequate liver, renal, and marrow function</span>
+                                  </label>
+                                </div>
+                              </div>
+                            )}
                           </div>
                         );
                       })

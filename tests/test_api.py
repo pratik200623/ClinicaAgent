@@ -86,3 +86,16 @@ def test_export_pdf_endpoint():
     pdf_content = b"".join(response.iter_bytes())
     assert pdf_content.startswith(b"%PDF-")
 
+
+def test_translate_endpoint():
+    payload = {
+        "text": "Hello, this is a test clinical report.",
+        "target_lang": "es"
+    }
+    response = client.post("/api/translate", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert "translated_text" in data
+    assert len(data["translated_text"]) > 0
+
+

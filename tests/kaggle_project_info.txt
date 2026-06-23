@@ -1,0 +1,342 @@
+kaggle Ai agent vibe coding capstone project indo link - https://www.kaggle.com/competitions/vibecoding-agents-capstone-project/overviewAs we wrap things up, this is our final roundup of reminders and announcements.
+
+📋 Reminders and Announcements
+
+
+Codelabs and Antigravity Quota: For those who ran out of Antigravity quota, you can resume the codelabs next week once the quota resets. For details, see the FAQs.
+Capstone Project: You’ll create an AI agent project showcasing a use case that leverages key capabilities learned throughout this course. The top 12 winners will receive Kaggle swag and have their work featured on Kaggle’s social media platforms. More details about the Capstone Project, including the evaluation and submission process, will be shared in a follow-up email later today. Join the dedicated Capstone Project channels on Kaggle’s Discord Server.
+Kaggle badge and certificate: Participants in the Capstone Project are eligible to earn a badge and certificate on their Kaggle profile. These will be added to all eligible profiles by the end of July 2026.
+Look out for the Kaggle Learn Guide for this course: All of the course content, including assignments and other links, is already available in this discussion forum. We are actively working to transition this content into a convenient Kaggle Learn Guide. We will be sharing this updated resource with you as soon as it is ready.
+5-Day AI Agents Intensive Course with Google Learn Guide: Originally hosted in November 2025, the course’s whitepapers have been updated with the latest content, making it easier than ever to learn and apply modern AI agent development concepts at your own pace.
+Share your feedback: We'd love to hear from you! Please take a few minutes to complete this quick feedback form and share your experience. Your input will help us improve this intensive for future participants
+
+ENTRY IN THIS COMPETITION CONSTITUTES YOUR ACCEPTANCE OF THESE OFFICIAL COMPETITION RULES.
+See Section 3.18 for defined terms
+
+The Competition named below is a skills-based competition to promote and further the field of data science. You must register via the Competition Website to enter. To enter the Competition, you must agree to these Official Competition Rules, which incorporate by reference the provisions and content of the Competition Website and any Specific Competition Rules herein (collectively, the "Rules"). Please read these Rules carefully before entry to ensure you understand and agree. You further agree that Submission in the Competition constitutes agreement to these Rules. You may not submit to the Competition and are not eligible to receive the prizes associated with this Competition unless you agree to these Rules. These Rules form a binding legal agreement between you and the Competition Sponsor with respect to the Competition. Your competition Submissions must conform to the requirements stated on the Competition Website. Your Submissions will be scored based on the evaluation metric described on the Competition Website. Subject to compliance with the Competition Rules, Prizes, if any, will be awarded to Participants with the best scores, based on the merits of the data science models submitted. See below for the complete Competition Rules. For Competitions designated as hackathons by the Competition Sponsor (“Hackathons”), your Submissions will be judged by the Competition Sponsor based on the evaluation rubric set forth on the Competition Website (“Evaluation Rubric”). The Prizes, if any, will be awarded to Participants with the highest ranking(s) as determined by the Competition Sponsor based on such rubric.
+
+You cannot sign up to Kaggle from multiple accounts and therefore you cannot enter or submit from multiple accounts.
+
+1. COMPETITION-SPECIFIC TERMS
+1. COMPETITION TITLE
+Vibecoding Agents - Capstone Project
+
+2. COMPETITION SPONSOR
+Google
+
+3. COMPETITION SPONSOR ADDRESS
+1600 Amphitheatre Pkwy Mountain View, CA 94043
+
+4. COMPETITION WEBSITE
+https://www.kaggle.com/competitions/vibecoding-agents-capstone-project
+
+5. TOTAL PRIZES AVAILABLE: 12 pieces of swag, distributed equally across 4 categories: Agents for Good, Agents for Business, Concierge Agents, Freestyle.
+6. WINNER LICENSE TYPE
+CC-BY 4.0
+
+7. DATA ACCESS AND USE
+N/A
+
+2. COMPETITION-SPECIFIC RULES
+In addition to the provisions of the General Competition Rules below, you understand and agree to these Competition-Specific Rules required by the Competition Sponsor:
+
+1. TEAM LIMITS
+a. The maximum Team size is five (5). b. Team mergers are allowed and can be performed by the Team leader. In order to merge, the combined Team must have a total Submission count less than or equal to the maximum allowed as of the Team Merger Deadline. The maximum allowed is the number of Submissions per day multiplied by the number of days the competition has been running. For Hackathons, each team is allowed one (1) Submission; any Submissions submitted by Participants before merging into a Team will be unsubmitted.
+
+2. SUBMISSION LIMITS
+a. For Hackathons, each Team may submit one (1) Submission only.
+
+3. COMPETITION TIMELINE
+a. Competition Timeline dates (including Entry Deadline, Final Submission Deadline, Start Date, and Team Merger Deadline, as applicable) are reflected on the competition’s Overview > Timeline page.
+
+4. COMPETITION DATA
+a. Data Access and Use.
+
+None. Competition Data will not be provided by Competition Sponsor for this Competition.
+b. Data Security.
+
+You agree to use reasonable and suitable measures to prevent persons who have not formally agreed to these Rules from gaining access to the Competition Data. You agree not to transmit, duplicate, publish, redistribute or otherwise provide or make available the Competition Data to any party not participating in the Competition. You agree to notify Kaggle immediately upon learning of any possible unauthorized transmission of or unauthorized access to the Competition Data and agree to work with Kaggle to rectify any unauthorized transmission or access.
+5. WINNER LICENSE
+a. Under Section 2.8 (Winners Obligations) of the General Rules below, you hereby grant and will grant the Competition Sponsor the following license(s) with respect to your Submission if you are a Competition winner:
+
+Open Source: You hereby license and will license your winning Submission and the source code used to generate the Submission under CC-BY 4.0, an Open Source Initiative-approved license (see www.opensource.org) that in no event limits commercial use of such code or model containing or depending on such code.
+
+For generally commercially available software that you used to generate your Submission that is not owned by you, but that can be procured by the Competition Sponsor without undue expense, you do not need to grant the license in the preceding Section for that software.
+
+In the event that input data or pretrained models with an incompatible license are used to generate your winning solution, you do not need to grant an open source license in the preceding Section for that data and/or model(s).
+
+b. You may be required by the Sponsor to provide a detailed description of how the winning Submission was generated, to the Competition Sponsor’s specifications, as outlined in Section 2.8, Winner’s Obligations. This may include a detailed description of methodology, where one must be able to reproduce the approach by reading the description, and includes a detailed explanation of the architecture, preprocessing, loss function, training details, hyper-parameters, etc. The description should also include a link to a code repository with complete and detailed instructions so that the results obtained can be reproduced.
+
+6. EXTERNAL DATA AND TOOLS
+a. You may use data other than the Competition Data (“External Data”) to develop and test your Submissions. However, you will ensure the External Data is either publicly available and equally accessible to use by all Participants of the Competition for purposes of the competition at no cost to the other Participants, or satisfies the Reasonableness criteria as outlined in Section 2.6.b below. The ability to use External Data under this Section does not limit your other obligations under these Competition Rules, including but not limited to Section 2.8 (Winners Obligations).
+
+b. The use of external data and models is acceptable unless specifically prohibited by the Host. Because of the potential costs or restrictions (e.g., “geo restrictions”) associated with obtaining rights to use external data or certain software and associated tools, their use must be “reasonably accessible to all” and of “minimal cost”. Also, regardless of the cost challenges as they might affect all Participants during the course of the competition, the costs of potentially procuring a license for software used to generate a Submission, must also be considered. The Host will employ an assessment of whether or not the following criteria can exclude the use of the particular LLM, data set(s), or tool(s):
+
+Are Participants being excluded from a competition because of the "excessive" costs for access to certain LLMs, external data, or tools that might be used by other Participants. The Host will assess the excessive cost concern by applying a “Reasonableness” standard (the “Reasonableness Standard”). The Reasonableness Standard will be determined and applied by the Host in light of things like cost thresholds and accessibility.
+
+By way of example only, a small subscription charge to use additional elements of a large language model such as Gemini Advanced are acceptable if meeting the Reasonableness Standard of Sec. 8.2. Purchasing a license to use a proprietary dataset that exceeds the cost of a prize in the competition would not be considered reasonable.
+
+c. Automated Machine Learning Tools (“AMLT”)
+
+Individual Participants and Teams may use automated machine learning tool(s) (“AMLT”) (e.g., Google toML, H2O Driverless AI, etc.) to create a Submission, provided that the Participant or Team ensures that they have an appropriate license to the AMLT such that they are able to comply with the Competition Rules.
+7. ELIGIBILITY
+a. Unless otherwise stated in the Competition-Specific Rules above or prohibited by internal policies of the Competition Entities, employees, interns, contractors, officers and directors of Competition Entities may enter and participate in the Competition, but are not eligible to win any Prizes. "Competition Entities" means the Competition Sponsor, Kaggle Inc., and their respective parent companies, subsidiaries and affiliates. If you are such a Participant from a Competition Entity, you are subject to all applicable internal policies of your employer with respect to your participation.
+
+8. WINNER’S OBLIGATIONS
+a. As a condition to being awarded a Prize, a Prize winner must fulfill the following obligations:
+
+Deliver to the Competition Sponsor the final model's software code as used to generate the winning Submission and associated documentation. The delivered software code should follow these documentation guidelines, must be capable of generating the winning Submission, and contain a description of resources required to build and/or run the executable code successfully. For avoidance of doubt, delivered software code should include training code, inference code, and a description of the required computational environment. For Hackathons, the Submission deliverables will be as described on the Competition Website, which may be information or materials that are not software code.
+a. To the extent that the final model’s software code includes generally commercially available software that is not owned by you, but that can be procured by the Competition Sponsor without undue expense, then instead of delivering the code for that software to the Competition Sponsor, you must identify that software, method for procuring it, and any parameters or other information necessary to replicate the winning Submission; Individual Participants and Teams who create a Submission using an AMLT may win a Prize. However, for clarity, the potential winner’s Submission must still meet the requirements of these Rules, including but not limited to Section 2.5 (Winners License), Section 2.8 (Winners Obligations), and Section 3.14 (Warranty, Indemnity, and Release).”
+
+b. Individual Participants and Teams who create a Submission using an AMLT may win a Prize. However, for clarity, the potential winner’s Submission must still meet the requirements of these Rules,
+
+Grant to the Competition Sponsor the license to the winning Submission stated in the Competition Specific Rules above, and represent that you have the unrestricted right to grant that license;
+
+Sign and return all Prize acceptance documents as may be required by Competition Sponsor or Kaggle, including without limitation: (a) eligibility certifications; (b) licenses, releases and other agreements required under the Rules; and (c) U.S. tax forms (such as IRS Form W-9 if U.S. resident, IRS Form W-8BEN if foreign resident, or future equivalents).
+
+9. GOVERNING LAW
+a. Unless otherwise provided in the Competition Specific Rules above, all claims arising out of or relating to these Rules will be governed by California law, excluding its conflict of laws rules, and will be litigated exclusively in the Federal or State courts of Santa Clara County, California, USA. The parties consent to personal jurisdiction in those courts. If any provision of these Rules is held to be invalid or unenforceable, all remaining provisions of the Rules will remain in full force and effect.
+
+COMPETITION TERMS AND CONDITIONS
+I agree to the Competition-specific rules above and Kaggle’s Foundational Competition Rules. The Kaggle Competition Foundational Rules supersede the Competition-specific rules in the event of any conflict.
+
+I understand joining this Competition creates a direct relationship between the Host and me. Kaggle has no liability for any promised prizes, commitments, content, or actions of a Host or Participant.
+
+When the hackathon closes, your writeup will be licensed under CC BY 4.0, and be publicly available on Kaggle, attributed to your current Kaggle display name. If you need to update this attribution later, reach out to support@kaggle.com.
+
+
+
+The AI Agents: Intensive Vibe Coding Capstone Project invites participants to build an AI agent using the concepts, tools, and best practices learned in Kaggle’s 5-Day AI Agents: Intensive Vibe Coding Course with Google. Participants will create a practical, real-world solution that demonstrates how AI agents can automate tasks, assist users, solve business challenges, or improve everyday workflows.
+
+Submissions should showcase both the project's value and technical implementation through a Kaggle Writeup, public codebase, video demonstration, and project link. Projects may be entered into one of four tracks: Agents for Good, Agents for Business, Concierge Agents, or Freestyle and will be evaluated based on innovation, solution design, communication, and the effective application of course concepts and agent technologies.
+
+Start
+
+4 days ago
+Close
+
+15 days to go
+Description
+AI agents are rapidly changing how we interact with technology, enabling systems that can reason, take action, and complete complex tasks on behalf of users. In this capstone project, you'll apply the concepts, tools, and techniques learned throughout Kaggle’s 5-Day AI Agents: Intensive Vibe Coding Course with Google to build an agent that solves a meaningful real-world problem. Whether you're creating an assistant that helps individuals stay organized, streamlines business processes, supports social impact initiatives, or explores a completely new idea, this project is an opportunity to move beyond experimentation and develop something useful, practical, and shareable. We encourage participants to think creatively, focus on delivering value, and demonstrate how agent-based systems can address real challenges.
+
+Your submission should showcase both the vision behind your project and the technical decisions that bring it to life. Judges will evaluate projects based on their problem definition, solution design, implementation quality, effective use of agent technologies, and overall user value. Successful submissions will clearly demonstrate concepts covered in the course while highlighting thoughtful architecture, strong documentation, and a compelling project story.
+
+By the end of the capstone, you'll have more than a prototype – you'll have a portfolio-ready project that demonstrates your ability to design, build, and communicate modern AI agent systems.
+
+Submission Requirements
+The Judges will be reviewing submissions in four tracks (please review the section "Tracks and Awards" to learn more about the categories). While we have set these to inspire and focus our capstone learners, we are always looking for innovative projects with a “wow” factor. After our review, we may move winners between tracks if that seems appropriate.
+
+A valid submission must contain the following:
+
+Kaggle Writeup
+Media Gallery
+Attached Public Video
+Attached Project Link
+Your final Submission must be made prior to the deadline. Any un-submitted or draft Writeups by the hackathon deadline will not be considered by the Judges.
+
+To create a new Writeup, click on the "New Writeup" button here. After you have saved your Writeup, you should see a "Submit" button in the top right corner.
+
+Note: If you attach a private Kaggle Resource to your public Kaggle Writeup, your private Resource will automatically be made public after the deadline.
+
+1. Kaggle Writeup
+The Kaggle Writeup serves as your project report. This should include a title, subtitle, and a detailed analysis of your submission. You must select a Track for your Writeup in order to submit.
+
+Your Writeup should not exceed 2,500 words. Submissions over this limit may be subject to penalty.
+
+The below assets must be attached to the Writeup to be eligible.
+
+a. Media Gallery
+This is where you should attach any images and/or videos associated with your submission. A cover image is required to submit your Writeup and a video is a required part of the submission.
+
+b. Video
+Attach your video to the Media Gallery. Videos should be 5 minutes or less, and should be published to Youtube.
+
+c. Public Project Link
+A URL to your working product or interactive demo. This allows judges to experience your project firsthand, if applicable. It should be publicly accessible and not require a login or paywall. If a live demo is not feasible, a link to your public code repository (e.g., GitHub) is required, including detailed setup instructions.
+
+
+Overview
+The AI Agents: Intensive Vibe Coding Capstone Project invites participants to build an AI agent using the concepts, tools, and best practices learned in Kaggle’s 5-Day AI Agents: Intensive Vibe Coding Course with Google. Participants will create a practical, real-world solution that demonstrates how AI agents can automate tasks, assist users, solve business challenges, or improve everyday workflows.
+
+Submissions should showcase both the project's value and technical implementation through a Kaggle Writeup, public codebase, video demonstration, and project link. Projects may be entered into one of four tracks: Agents for Good, Agents for Business, Concierge Agents, or Freestyle and will be evaluated based on innovation, solution design, communication, and the effective application of course concepts and agent technologies.
+
+Description
+AI agents are rapidly changing how we interact with technology, enabling systems that can reason, take action, and complete complex tasks on behalf of users. In this capstone project, you'll apply the concepts, tools, and techniques learned throughout Kaggle’s 5-Day AI Agents: Intensive Vibe Coding Course with Google to build an agent that solves a meaningful real-world problem. Whether you're creating an assistant that helps individuals stay organized, streamlines business processes, supports social impact initiatives, or explores a completely new idea, this project is an opportunity to move beyond experimentation and develop something useful, practical, and shareable. We encourage participants to think creatively, focus on delivering value, and demonstrate how agent-based systems can address real challenges.
+
+Your submission should showcase both the vision behind your project and the technical decisions that bring it to life. Judges will evaluate projects based on their problem definition, solution design, implementation quality, effective use of agent technologies, and overall user value. Successful submissions will clearly demonstrate concepts covered in the course while highlighting thoughtful architecture, strong documentation, and a compelling project story.
+
+By the end of the capstone, you'll have more than a prototype – you'll have a portfolio-ready project that demonstrates your ability to design, build, and communicate modern AI agent systems.
+
+Submission Requirements
+The Judges will be reviewing submissions in four tracks (please review the section "Tracks and Awards" to learn more about the categories). While we have set these to inspire and focus our capstone learners, we are always looking for innovative projects with a “wow” factor. After our review, we may move winners between tracks if that seems appropriate.
+
+A valid submission must contain the following:
+
+Kaggle Writeup
+Media Gallery
+Attached Public Video
+Attached Project Link
+Your final Submission must be made prior to the deadline. Any un-submitted or draft Writeups by the hackathon deadline will not be considered by the Judges.
+
+To create a new Writeup, click on the "New Writeup" button here. After you have saved your Writeup, you should see a "Submit" button in the top right corner.
+
+Note: If you attach a private Kaggle Resource to your public Kaggle Writeup, your private Resource will automatically be made public after the deadline.
+
+1. Kaggle Writeup
+The Kaggle Writeup serves as your project report. This should include a title, subtitle, and a detailed analysis of your submission. You must select a Track for your Writeup in order to submit.
+
+Your Writeup should not exceed 2,500 words. Submissions over this limit may be subject to penalty.
+
+The below assets must be attached to the Writeup to be eligible.
+
+a. Media Gallery
+This is where you should attach any images and/or videos associated with your submission. A cover image is required to submit your Writeup and a video is a required part of the submission.
+
+b. Video
+Attach your video to the Media Gallery. Videos should be 5 minutes or less, and should be published to Youtube.
+
+c. Public Project Link
+A URL to your working product or interactive demo. This allows judges to experience your project firsthand, if applicable. It should be publicly accessible and not require a login or paywall. If a live demo is not feasible, a link to your public code repository (e.g., GitHub) is required, including detailed setup instructions.
+
+
+
+Tracks and Awards
+Agents for Good
+In the Agents for Good track, we’ll be looking for submissions that help solve problems for humanity. From optimizing agriculture to managing public health, advancing education or supporting art and literature - this is the track for helping people.
+
+
+Award 1
+Winner will receive Kaggle swag.
+
+Non-monetary
+
+Award 2
+Winner will receive Kaggle swag.
+
+Non-monetary
+
+Award 3
+Winner will receive Kaggle swag.
+
+Non-monetary
+Agents for Business
+Enterprises are increasingly using AI agents to solve critical problems, from managing expense submissions to highlighting pipeline actions, driving insights or creating new products. In this track, you’ll create an agent designed to solve compelling business problems with cost or revenue on the line.
+
+
+Award 1
+Winner will receive Kaggle swag.
+
+Non-monetary
+
+Award 2
+Winner will receive Kaggle swag.
+
+Non-monetary
+
+Award 3
+Winner will receive Kaggle swag.
+
+Non-monetary
+Concierge Agents
+The opportunity for personal AI agents to streamline and simplify people’s lives is incredible. From managing the invite list for a party to planning a garden, or helping manage complicated medications - safe and secure agents can free time for things that really matter. In this track, you will solve individual, family or social challenges in a way that keeps personal information safe and secure.
+
+
+Award 1
+Winner will receive Kaggle swag.
+
+Non-monetary
+
+Award 2
+Winner will receive Kaggle swag.
+
+Non-monetary
+
+Award 3
+Winner will receive Kaggle swag.
+
+Non-monetary
+Freestyle
+Do you have a great idea that doesn’t fit into a neat bucket? Maybe it’s an agent helping your fandom keep track of concert recordings, helping decode cursive uploaded by historians, or tracking the position of recently launched satellites. Whatever you build, this submission will show the best practices of agent development and deployment!
+
+
+Award 1
+Winner will receive Kaggle swag.
+
+Non-monetary
+
+Award 2
+Winner will receive Kaggle swag.
+
+Non-monetary
+
+Award 3
+Winner will receive Kaggle swag.
+
+Non-monetary
+Evaluation
+In your submission, you must demonstrate what you’ve learned in this course by applying at least three (3) of the key concepts covered in the course, including:
+
+Key Concept	Where to Demonstrate
+Agent / Multi-agent system (ADK)	Code
+MCP Server	Code
+Antigravity	Video
+Security features	Code or Video
+Deployability	Video
+Agent skills (e.g., Agents CLI)	Code or Video
+
+Category 1: The Pitch - Problem, Solution, Value (30 points total)
+
+This is where you'll be evaluated on the "why" and "what" of your project and how well you communicate your vision.
+
+Criteria (points)	Description
+Core Concept & Value
+(10 points)	Your project's central idea, its relevance to the track for the submission; focused on innovation and value. The use of agents should be clear, meaningful and central to your solution.
+YouTube Video Submission
+(10 points)	Your video should showcase clarity, conciseness and quality of messaging. It should articulate some of the following - but only in the 5 minute limit:
+- Problem Statement: Describe the problem you're trying to solve, and why you think it's an important or interesting problem to solve.
+- Agents: Why agents? How can agents uniquely help solve that problem?
+- Architecture: Images and a description of the overall agent architecture.
+- Demo: demo of your solution, which can include images, an animation, or a video of the agent working.
+- The Build: How you created it, what tools or technologies you used.
+Writeup
+(10 points)	How well your written submission articulates the problem you're solving, your solution, its architecture, and your project's journey.
+
+
+Category 2: The Implementation - Architecture, Code (70 points total)
+
+This is where you'll be evaluated on the "how" of your project. This includes the quality of your code, technical design, and AI integration.
+
+Criteria (points)	Description
+Technical Implementation
+(50 points)	For this criteria, we will assess the quality of your solution's architecture, and your code, and the meaningful use of agents in your solution. We will also be looking at your tool use, especially clever usage of existing toolsets.
+Your code should contain comments pertinent to implementation, design and behaviors.
+Participants are not required to deploy their agents to a live public endpoint for judging purposes; however, if you do deploy, please provide documentation to reproduce the deployment.
+🚨REMINDER: DO NOT INCLUDE ANY API KEYS OR PASSWORDS IN YOUR CODE.
+Documentation
+(20 points)	Your submission (when submitting via GitHub) should contain a README.md file explaining the problem, solution, architecture, instructions for setup, and relevant diagrams or images where appropriate.
+Judges
+Tanvi Singhal
+Laxmi Harikumar
+Aman Tayal
+Vijit Singh
+Eric Schmidt
+Developer Advocacy, Google
+Nilay Chauhan
+DevRel, Kaggle
+Thilakraj Sripal
+AI/ML Specialist, Kaggle
+Naz Bayrak
+AI Specialist , Google
+Luis Sala
+MartynaPlomecka
+Research Scientist, Google Deepmind
+Tania Rodriguez Fuentes
+Program Manager, EPAM Systems
+Sara Wolley
+Program Manager, Kaggle
+Brenda Flynn
+Program Manager, Kaggle
+
+
+
+IF YOU NEED MORE INFO THEN SEARCH ON INTERNATE - [Wrap Up + Next Steps] 5-Day AI Agents: Intensive Vibe Coding Course With Google 2026 
