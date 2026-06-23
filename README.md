@@ -1,6 +1,10 @@
 # ClinicaAgent 🧬🔍
 > **Intelligent Multi-Agent Clinical & Genomic Intelligence Platform**  
 > *Built for the Kaggle "AI Agents: Intensive Vibe Coding Capstone Project" (Agents for Good Track)*
+>
+> We use United States (US) national public data hosted by the National Center for Biotechnology Information (NCBI) and the National Library of Medicine (NLM).
+> why i not use india data 
+We used US databases because NCBI, PubMed, and ClinicalTrials.gov serve as the international standard registries containing global data (including India) and provide free, developer-friendly public APIs.
 
 ClinicaAgent is an autonomous clinical matchmaking and genomic intelligence tool designed to help oncology professionals parse patient conditions, fetch pathogenicity reports from ClinVar, find active recruiting clinical trials, reference literature from PubMed, and generate signed, verified clinical reports.
 
