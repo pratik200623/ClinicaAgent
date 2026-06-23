@@ -158,3 +158,27 @@ git push -u origin main
      - **Key**: `VITE_API_URL`
      - **Value**: Your Render backend URL (e.g. `https://clinica-agent-api.onrender.com` - *without a trailing slash*).
 4. Click **Deploy**. Vercel will host your site and generate a live URL (e.g., `https://clinica-agent.vercel.app`).
+
+
+
+
+ClinicaAgent Enhancements Tasks
+ Implement Backend Translation Components
+ Add deep-translator dependency to backend/requirements.txt
+ Create backend/utils/translator.py with translation wrapper
+ Add POST /api/translate endpoint in backend/main.py
+ Create a standalone script to test translation component
+ Implement Frontend Interactive Eligibility Pre-Screening Checklist
+ Update trial card UI in frontend/src/App.jsx to render collapsible checklist
+ Add checklist logic, including auto-checking age/sex and calculating percentage match score
+ Implement Frontend FHIR JSON Export
+ Add "Export FHIR JSON" button in the Doctor Verification Hub
+ Add JSON formatting logic to package patient profile, variants, and approved trials into a standardized HL7 FHIR Bundle
+ Connect Translation and Checklist to Report PDF
+ Update backend/main.py and backend/utils/pdf_generator.py to receive and render checklist status
+ Complete System Integration Testing & Verification
+ Run diagnostic endpoint test script
+ Perform manual run of full frontend and backend pipeline
+ Confirm everything works perfectly together
+ Git Verification
+ Check git status to ensure clean workspace
