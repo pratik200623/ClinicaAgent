@@ -7,6 +7,10 @@
 We used US databases because NCBI, PubMed, and ClinicalTrials.gov serve as the international standard registries containing global data (including India) and provide free, developer-friendly public APIs.
 > what is main perpose of this project 
 The main purpose of ClinicaAgent is to automate the matching of cancer patients to active clinical trials, genomic variant pathogenicity records, and medical literature in a unified, verified digital hub for oncology professionals.
+>
+> the solution
+
+The solution is an autonomous multi-agent system that parses natural language queries, searches multiple medical APIs concurrently (with zero LLM fees), and provides a doctor-in-the-loop verification hub to export signed clinical reports.
 
 ClinicaAgent is an autonomous clinical matchmaking and genomic intelligence tool designed to help oncology professionals parse patient conditions, fetch pathogenicity reports from ClinVar, find active recruiting clinical trials, reference literature from PubMed, and generate signed, verified clinical reports.
 
