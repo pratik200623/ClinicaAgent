@@ -11,7 +11,8 @@ import {
   FileText,
   MapPin,
   ChevronRight,
-  ExternalLink
+  ExternalLink,
+  Loader2
 } from 'lucide-react'
 
 const EXAMPLES = [
@@ -51,7 +52,36 @@ export default function App() {
   const [translating, setTranslating] = useState(false)
   const [checklistStates, setChecklistStates] = useState({})
 
+  // Backend health-check state
+  const [backendReady, setBackendReady] = useState(false)
+  const [backendWarmingUp, setBackendWarmingUp] = useState(true)
+
   const API_BASE = import.meta.env.VITE_API_URL || '';
+
+  // Ping the backend health endpoint on page load
+  useEffect(() => {
+    let cancelled = false;
+    const pingHealth = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/health`);
+        if (!cancelled && res.ok) {
+          setBackendReady(true);
+          setBackendWarmingUp(false);
+        }
+      } catch {
+        // Backend still waking up, retry after 3s
+        if (!cancelled) {
+          setTimeout(pingHealth, 3000);
+        }
+      }
+    };
+    pingHealth();
+    // Auto-hide after 60s even if health check fails
+    const timeout = setTimeout(() => {
+      if (!cancelled) setBackendWarmingUp(false);
+    }, 60000);
+    return () => { cancelled = true; clearTimeout(timeout); };
+  }, [API_BASE]);
 
   // Eligibility Check Helpers
   const checkAgeEligibility = (patientAge, ageRangeStr) => {
@@ -475,6 +505,26 @@ export default function App() {
 
   return (
     <div className="container">
+      {/* Backend Warming Up Banner */}
+      {backendWarmingUp && !backendReady && (
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(0,242,254,0.15), rgba(79,172,254,0.15))',
+          border: '1px solid rgba(0,242,254,0.3)',
+          borderRadius: '12px',
+          padding: '0.8rem 1.2rem',
+          marginBottom: '1rem',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.75rem',
+          animation: 'pulse 2s ease-in-out infinite'
+        }}>
+          <Loader2 size={18} style={{ color: '#00f2fe', animation: 'spin 1s linear infinite' }} />
+          <span style={{ color: '#ccd6f6', fontSize: '0.9rem' }}>
+            ⚡ Warming up servers... First load may take ~30s. Hang tight!
+          </span>
+        </div>
+      )}
+
       {/* Header */}
       <header className="header">
         <div className="brand">
